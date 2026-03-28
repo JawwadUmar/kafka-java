@@ -1,19 +1,20 @@
 package io.conduktor.demos.kafka;
 
-
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.CooperativeStickyAssignor;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class ConsumerDemoWithShutDown {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerDemoWithShutDown.class.getSimpleName());
+public class ConsumerDemoCooperative {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerDemoCooperative.class.getSimpleName());
 
 
     public static void main(String[] args) {
@@ -29,6 +30,16 @@ public class ConsumerDemoWithShutDown {
         properties.setProperty("value.deserializer", StringDeserializer.class.getName());
         properties.setProperty("group.id", groupId);
         properties.setProperty("auto.offset.reset", "earliest"); //earliest, latest, none
+
+//        by default
+//        partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+        properties.setProperty("partition.assignment.strategy", CooperativeStickyAssignor.class.getName());
+
+
+//        properties.setProperty("group.instance.id", ""); strategy for static assignments
+
+
+
 
         //create a consumer
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<>(properties);
@@ -82,6 +93,3 @@ public class ConsumerDemoWithShutDown {
 
     }
 }
-
-
-
