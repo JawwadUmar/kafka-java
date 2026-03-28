@@ -24,11 +24,15 @@ cd kafka-stack-docker-compose
 
 ```bash
 docker compose -f conduktor-kafka-single.yml up
-
 ```
--Kafka will be available at `$DOCKER_HOST_IP:9092`
--Conduktor will be available at : `$DOCKER_HOST_IP:8080`
+
+* Kafka will be available at `$DOCKER_HOST_IP:9092`
+* Conduktor will be available at `$DOCKER_HOST_IP:8080`
+
 ---
+
+
+
 
 
 
