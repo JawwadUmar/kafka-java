@@ -1,4 +1,4 @@
-~~# Kafka Stack with Docker Compose [Beginner]
+# Kafka Stack with Docker Compose [Beginner]
 
 This project sets up a **Kafka stack** using Docker Compose, including Kafka and Conduktor for easy management and visualization.
 
